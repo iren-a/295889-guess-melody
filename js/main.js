@@ -27,6 +27,6 @@ const toggleScreenHandler = (evt) => {
   }
 };
 
-document.addEventListener(`keydown`, toggleScreenHandler)
+document.addEventListener(`keydown`, toggleScreenHandler);
 
 toggleScreen(0);
