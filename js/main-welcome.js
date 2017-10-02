@@ -1,27 +1,25 @@
 import {getElementbyTemplate, renderScreen} from "./utils";
-import {playButton} from "./main";
 import mainLevelArtist from "./main-level-artist";
-import mainLevelGenre from "./main-level-genre";
 
-const template = document.querySelector(`#templates`).content.querySelector(`.main--welcome`).outerHTML;
+const template = `<section class="main main--welcome">
+    <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
+    <button class="main-play">Начать игру</button>
+    <h2 class="title main-title">Правила игры</h2>
+    <p class="text main-text">
+      Правила просты&nbsp;— за&nbsp;5 минут ответить на все вопросы.<br>
+      Ошибиться можно 3 раза.<br>
+      Удачи!
+    </p>
+  </section>`;
 
 const mainWelcomeElement = getElementbyTemplate(template);
 
-const answers = document.querySelectorAll(`.main-answer`);
+const playButton = mainWelcomeElement.querySelector(`.main-play`);
 
-const answerClickHandler = (evt) => {
-  renderScreen(mainLevelGenre);
-};
-
-answers.forEach((item) => {
-  item.addEventListener(`click`, answerClickHandler);
-});
-
-const playButtonClickHandler = (evt) => {
+const playButtonClickHandler = () => {
   renderScreen(mainLevelArtist);
 };
 
 playButton.addEventListener(`click`, playButtonClickHandler);
-
 
 export default mainWelcomeElement;
