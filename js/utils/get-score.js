@@ -1,11 +1,8 @@
-const fastTime = 30000;
+import {settings} from "../data/game-options";
 
-export default (answers, attemptsLeft) => {
-  if (answers.length < 10 || attemptsLeft === 0) {
-    return -1;
-  }
+export default (answers) => {
   return answers.reduce((sum, current) => {
-    if (current.isCorrect && current.time < fastTime) {
+    if (current.isCorrect && current.time < settings.maxQuickAnswerTime) {
       return sum + 2;
     } else if (current.isCorrect) {
       return sum + 1;

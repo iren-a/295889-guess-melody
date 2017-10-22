@@ -1,5 +1,6 @@
 import getElementbyTemplate from "../../utils/get-element-by-template";
-import process from "../../utils/process";
+import switchScreen from "../../utils/switch-screen";
+import processingAnswer from "../../utils/processing-answer";
 import getStateTemplate from "../get-state-template";
 import getPlayerTemplate from "../get-player-template";
 
@@ -34,8 +35,8 @@ export default (state, question) => {
   const answers = screen.querySelectorAll(`.main-answer-r`);
 
   const answerClickHandler = (evt) => {
-    console.log(evt.target.value);
-    process();
+    processingAnswer([evt.target.value], question);
+    switchScreen();
   };
 
   answers.forEach((item) => {

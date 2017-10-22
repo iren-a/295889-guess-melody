@@ -1,5 +1,6 @@
 import getElementbyTemplate from "../../utils/get-element-by-template";
-import process from "../../utils/process";
+import switchScreen from "../../utils/switch-screen";
+import processingAnswer from "../../utils/processing-answer";
 import getStateTemplate from "../get-state-template";
 import getPlayerTemplate from "../get-player-template";
 
@@ -10,7 +11,7 @@ export default (state, question) => {
   const answersList = question.answerList.map((item, i) => {
     return `<div class="genre-answer">
           ${getPlayerTemplate(item.answer)}
-          <input type="checkbox" name="answer" value="answer-${i + 1}" id="a-${i + 1}">
+          <input type="checkbox" name="answer" value="${item.answer}" id="a-${i + 1}">
           <label class="genre-answer-check" for="a-${i + 1}"></label>
         </div>`;
   }).join(``);
@@ -34,7 +35,7 @@ export default (state, question) => {
   const answers = screen.querySelectorAll(`input[name="answer"]`);
 
   const isSomeAnswerSelected = () => {
-    return Array.prototype.some.call(answers, (item) => item.checked);
+    return Array.from(answers).some((item) => item.checked);
   };
 
   const answerClickHandler = () => {
@@ -45,13 +46,18 @@ export default (state, question) => {
     }
   };
 
-  Array.prototype.forEach.call(answers, (item) => {
+  Array.from(answers).forEach((item) => {
     item.addEventListener(`click`, answerClickHandler);
   });
 
   const buttonClickHandler = (evt) => {
     evt.preventDefault();
-    process();
+    processingAnswer(Array.from(answers).filter((item) => {
+      return item.checked;
+    }).map((item) => {
+      return item.value;
+    }), question);
+    switchScreen();
   };
 
   button.addEventListener(`click`, buttonClickHandler);

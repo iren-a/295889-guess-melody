@@ -3,7 +3,7 @@ import audio from "./audio";
 const settings = {
   maxGametime: 300000,
   maxCountMistakes: 3,
-  maxQuickAnswerTime: 30,
+  maxQuickAnswerTime: 30000,
   countLevels: 10
 };
 
@@ -11,10 +11,14 @@ const state = {
   timeLeft: settings.maxGametime,
   mistakes: 0,
   level: 0,
+  results: [],
+  isReset: false,
   reset() {
     this.time = settings.maxGametime;
     this.mistakes = 0;
     this.level = 0;
+    this.results = [];
+    this.isReset = false;
   }
 };
 
@@ -226,5 +230,6 @@ const questions = [
   }
 ];
 
+const statistics = [1, 2, 3, 4, 5];
 
-export {settings, state, questions};
+export {settings, state, questions, statistics};

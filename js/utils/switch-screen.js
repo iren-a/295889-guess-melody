@@ -9,14 +9,21 @@ import getScreenResultWin from "../templates/screens/result-win";
 
 export default () => {
 
-  if (state.timeLeft === 0) {
+  if (state.isReset) {
+    state.reset();
+    renderScreen(getScreenWelcome());
+
+  } else if (state.timeLeft === 0) {
     renderScreen(getScreenResultTimeOver());
+    state.isReset = true;
 
   } else if (state.mistakes > settings.maxCountMistakes) {
     renderScreen(getScreenResultAttemptsOver());
+    state.isReset = true;
 
   } else if (state.level === settings.countLevels) {
     renderScreen(getScreenResultWin());
+    state.isReset = true;
 
   } else {
     if (questions[state.level].type === `artist`) {

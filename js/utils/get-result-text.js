@@ -1,16 +1,11 @@
-export default (statistics, result) => {
-  if (result.timeLeft === 0) {
-    return `Время вышло! Вы не успели отгадать все мелодии`;
-  }
-  if (result.attemptsLeft === 0) {
-    return `У вас закончились все попытки. Ничего, повезёт в следующий раз!`;
-  }
-  statistics.push(result.score);
+export default (statistics, score) => {
+
+  statistics.push(score);
   statistics.sort((left, right) => right - left);
   const countOfPlayers = statistics.length;
-  const position = statistics.lastIndexOf(result.score) + 1;
+  const position = statistics.lastIndexOf(score) + 1;
   const percent = (countOfPlayers - position) / countOfPlayers * 100;
 
-  return `Вы заняли ${position} место из ${countOfPlayers} игроков. Это лучше чем у ${percent}% игроков`;
+  return `Вы заняли ${position} место из ${countOfPlayers} игроков. Это&nbsp;лучше чем у&nbsp;${percent}%&nbsp;игроков`;
 
 };

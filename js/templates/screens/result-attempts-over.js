@@ -1,5 +1,5 @@
 import getElementbyTemplate from "../../utils/get-element-by-template";
-import process from "../../utils/process";
+import switchScreen from "../../utils/switch-screen";
 import getLogoTemplate from "../get-logo-template";
 import getReplayButtonTemplate from "../get-replay-button-template";
 
@@ -21,7 +21,7 @@ export default () => {
   const replayButton = screen.querySelector(`.main-replay`);
 
   const replayButtonClickHandler = () => {
-    process();
+    switchScreen();
   };
 
   replayButton.addEventListener(`click`, replayButtonClickHandler);
