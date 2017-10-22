@@ -1,6 +1,6 @@
 const fastTime = 30000;
 
-const getScore = (answers, attemptsLeft) => {
+export default (answers, attemptsLeft) => {
   if (answers.length < 10 || attemptsLeft === 0) {
     return -1;
   }
@@ -15,5 +15,3 @@ const getScore = (answers, attemptsLeft) => {
   }, 0);
 
 };
-
-export default getScore;
