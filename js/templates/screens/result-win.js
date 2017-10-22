@@ -1,5 +1,8 @@
 import getElementbyTemplate from "../../utils/get-element-by-template";
-import process from "../../utils/process";
+import {settings, state, statistics} from "../../data/game-options";
+import getScore from "../../utils/get-score";
+import getResultText from "../../utils/get-result-text";
+import switchScreen from "../../utils/switch-screen";
 import getLogoTemplate from "../get-logo-template";
 import getReplayButtonTemplate from "../get-replay-button-template";
 
@@ -8,10 +11,16 @@ export default () => {
 
   const title = `<h2 class="title">Вы настоящий меломан!</h2>`;
 
+  const score = getScore(state.results);
+
+  const countQuickAnswers = state.results.filter((item) => {
+    return (item.isCorrect && item.time < settings.maxQuickAnswerTime);
+  }).length;
+
   const statTemplate = `<div class="main-stat">За&nbsp;3&nbsp;минуты и 25&nbsp;секунд
-      <br>вы&nbsp;набрали 12 баллов (8 быстрых)
-      <br>совершив 3 ошибки</div>
-    <span class="main-comparison">Вы заняли 2 место из 10. Это&nbsp;лучше чем у&nbsp;80%&nbsp;игроков</span>`;
+      <br>вы&nbsp;набрали ${score} баллов (${countQuickAnswers} быстрых)
+      <br>совершив ${state.mistakes} ошибки</div>
+    <span class="main-comparison">${getResultText(statistics, score)}</span>`;
 
   const template = `<section class="main main--result">
     ${getLogoTemplate()}
@@ -25,7 +34,7 @@ export default () => {
   const replayButton = screen.querySelector(`.main-replay`);
 
   const replayButtonClickHandler = () => {
-    process();
+    switchScreen();
   };
 
   replayButton.addEventListener(`click`, replayButtonClickHandler);

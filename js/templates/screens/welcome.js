@@ -1,6 +1,6 @@
 import getElementbyTemplate from "../../utils/get-element-by-template";
 import {settings} from "../../data/game-options";
-import process from "../../utils/process";
+import switchScreen from "../../utils/switch-screen";
 import getLogoTemplate from "../get-logo-template";
 
 export default () => {
@@ -27,7 +27,7 @@ export default () => {
   const playButton = screen.querySelector(`.main-play`);
 
   const playButtonClickHandler = () => {
-    process();
+    switchScreen();
   };
 
   playButton.addEventListener(`click`, playButtonClickHandler);
