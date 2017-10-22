@@ -1,4 +1,4 @@
-import {renderScreen} from "./utils";
-import mainWelcomeElement from "./main-welcome";
+import renderScreen from "./utils/render-screen";
+import getScreenWelcome from "./templates/screens/welcome";
 
-renderScreen(mainWelcomeElement);
+renderScreen(getScreenWelcome());

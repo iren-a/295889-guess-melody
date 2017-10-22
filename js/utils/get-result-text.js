@@ -1,4 +1,4 @@
-const getResultText = (statistics, result) => {
+export default (statistics, result) => {
   if (result.timeLeft === 0) {
     return `Время вышло! Вы не успели отгадать все мелодии`;
   }
@@ -14,5 +14,3 @@ const getResultText = (statistics, result) => {
   return `Вы заняли ${position} место из ${countOfPlayers} игроков. Это лучше чем у ${percent}% игроков`;
 
 };
-
-export default getResultText;
