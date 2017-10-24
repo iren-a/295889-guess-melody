@@ -1,7 +1,7 @@
 import renderScreen from "./render-screen";
 import {settings, state, questions} from "../data/game-options";
-import getScreenWelcome from "../templates/screens/welcome";
-import getScreenLevelArtist from "../templates/screens/level-artist";
+import getScreenWelcome from "../templates/screens/welcome/welcome";
+import getScreenLevelArtist from "../templates/screens/level-artist/level-artist";
 import getScreenLevelGenre from "../templates/screens/level-genre";
 import getScreenResultAttemptsOver from "../templates/screens/result-attempts-over";
 import getScreenResultTimeOver from "../templates/screens/result-time-over";
