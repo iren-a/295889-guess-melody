@@ -13,9 +13,7 @@ export default (state) => {
       </div>
     </svg>
     <div class="main-mistakes">
-      ${new Array(state.mistakes)
-      .fill(`<img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">`)
-      .join(``)}
+      ${`<img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">`.repeat(state.mistakes)}
     </div>`;
 
 };
