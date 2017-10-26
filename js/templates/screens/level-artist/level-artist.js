@@ -3,7 +3,7 @@ import switchScreen from "../../../utils/switch-screen";
 import processingAnswer from "../../../utils/processing-answer";
 
 export default (state, question) => {
-  const screen = new LevelArtistView();
+  const screen = new LevelArtistView(state, question);
 
   screen.answerClickHandler = (evt) => {
     processingAnswer([evt.target.value], question);

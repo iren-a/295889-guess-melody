@@ -1,11 +1,11 @@
 import renderScreen from "./render-screen";
-import {settings, state, questions} from "../data/game-options";
+import {settings, state, questions, statistics} from "../data/game-options";
 import getScreenWelcome from "../templates/screens/welcome/welcome";
 import getScreenLevelArtist from "../templates/screens/level-artist/level-artist";
-import getScreenLevelGenre from "../templates/screens/level-genre";
-import getScreenResultAttemptsOver from "../templates/screens/result-attempts-over";
-import getScreenResultTimeOver from "../templates/screens/result-time-over";
-import getScreenResultWin from "../templates/screens/result-win";
+import getScreenLevelGenre from "../templates/screens/level-genre/level-genre";
+import getScreenResultAttemptsOver from "../templates/screens/result-attempts-over/result-attempts-over";
+import getScreenResultTimeOver from "../templates/screens/result-time-over/result-time-over";
+import getScreenResultWin from "../templates/screens/result-win/result-win";
 
 export default () => {
 
@@ -22,7 +22,7 @@ export default () => {
     state.isReset = true;
 
   } else if (state.level === settings.countLevels) {
-    renderScreen(getScreenResultWin());
+    renderScreen(getScreenResultWin(state, statistics));
     state.isReset = true;
 
   } else {
