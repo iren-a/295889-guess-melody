@@ -30,14 +30,17 @@ const questions = [
     answerList: [
       {
         answer: audio[0].artist,
+        image: audio[0].image,
         isCorrect: false
       },
       {
         answer: audio[1].artist,
+        image: audio[1].image,
         isCorrect: true
       },
       {
         answer: audio[2].artist,
+        image: audio[2].image,
         isCorrect: false
       }
     ]
@@ -71,14 +74,17 @@ const questions = [
     answerList: [
       {
         answer: audio[0].artist,
+        image: audio[0].image,
         isCorrect: false
       },
       {
         answer: audio[1].artist,
+        image: audio[1].image,
         isCorrect: true
       },
       {
         answer: audio[2].artist,
+        image: audio[2].image,
         isCorrect: false
       }
     ]
@@ -112,14 +118,17 @@ const questions = [
     answerList: [
       {
         answer: audio[0].artist,
+        image: audio[0].image,
         isCorrect: false
       },
       {
         answer: audio[1].artist,
+        image: audio[1].image,
         isCorrect: true
       },
       {
         answer: audio[2].artist,
+        image: audio[2].image,
         isCorrect: false
       }
     ]
@@ -153,14 +162,17 @@ const questions = [
     answerList: [
       {
         answer: audio[0].artist,
+        image: audio[0].image,
         isCorrect: false
       },
       {
         answer: audio[1].artist,
+        image: audio[1].image,
         isCorrect: true
       },
       {
         answer: audio[2].artist,
+        image: audio[2].image,
         isCorrect: false
       }
     ]
@@ -194,14 +206,17 @@ const questions = [
     answerList: [
       {
         answer: audio[0].artist,
+        image: audio[0].image,
         isCorrect: false
       },
       {
         answer: audio[1].artist,
+        image: audio[1].image,
         isCorrect: true
       },
       {
         answer: audio[2].artist,
+        image: audio[2].image,
         isCorrect: false
       }
     ]
