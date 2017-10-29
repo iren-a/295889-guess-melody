@@ -1,5 +1,5 @@
 import Application from "../application";
-import {settings, state, questions, statistics} from "../data/game-options";
+import {settings, state, questions} from "../data/game-options";
 
 export default () => {
 
@@ -8,18 +8,15 @@ export default () => {
     Application.showWelcome(state);
 
   } else if (state.time === 0) {
-    state.timer.stop();
-    Application.showResultTimeOver();
+    Application.showResultTimeOver(state);
     state.isReset = true;
 
   } else if (state.mistakes > settings.maxCountMistakes) {
-    state.timer.stop();
-    Application.showResultAttemptsOver();
+    Application.showResultAttemptsOver(state);
     state.isReset = true;
 
   } else if (state.level === settings.countLevels) {
-    state.timer.stop();
-    Application.showResultWin(state, statistics);
+    Application.showResultWin(state);
     state.isReset = true;
 
   } else {
