@@ -1,4 +1,4 @@
-import renderScreen from "./utils/render-screen";
-import getScreenWelcome from "./templates/screens/welcome/welcome";
+import {state} from "./data/game-options";
+import Application from "./application";
 
-renderScreen(getScreenWelcome());
+Application.showWelcome(state);

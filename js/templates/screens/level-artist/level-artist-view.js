@@ -1,5 +1,6 @@
 import AbstractView from "../../../abstract-view";
-import getStateTemplate from "../../get-state-template";
+import TimerView from '../../timer-view';
+import getMistakesTemplate from "../../get-mistakes-template";
 import getPlayerTemplate from "../../get-player-template";
 
 const getTitle = (title) => {
@@ -19,9 +20,10 @@ const getAnswersList = (question) => {
   }).join(``);
 };
 
-const getTemplate = (state, question) => {
+const getTemplate = (question, timerTemplate, mistakesCount) => {
   return `<section class="main main--level main--level-artist">
-    ${getStateTemplate(state)}
+    ${timerTemplate}
+    ${getMistakesTemplate(mistakesCount)}
     <div class="main-wrap">
       ${getTitle(question.title)}
       ${getPlayerTemplate(question.audioSrc)}
@@ -38,15 +40,19 @@ export default class LevelArtistView extends AbstractView {
     super();
     this.state = state;
     this.question = question;
+    this.timerView = new TimerView();
   }
   get template() {
-    return getTemplate(this.state, this.question);
+    return getTemplate(this.question, this.timerView.template, this.state.mistakes);
   }
   bind() {
     const answers = this.element.querySelectorAll(`.main-answer-r`);
     answers.forEach((item) => {
       item.addEventListener(`click`, this.answerClickHandler);
     });
+  }
+  updateTime(time) {
+    this.timerView.updateTime(time);
   }
   answerClickHandler() {}
 }

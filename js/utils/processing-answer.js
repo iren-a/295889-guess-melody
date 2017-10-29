@@ -12,7 +12,7 @@ const isArrayEqual = (arr1, arr2) => {
   return true;
 };
 
-export default (answers, question) => {
+export default (answers, question, answerTimerValue) => {
   const correctAnswers = question.answerList.filter((item) => {
     return item.isCorrect;
   }).map((item) => {
@@ -21,7 +21,7 @@ export default (answers, question) => {
 
   const checkAnswer = isArrayEqual(answers, correctAnswers);
 
-  state.results.push({time: 30001, isCorrect: checkAnswer});
+  state.results.push({time: answerTimerValue, isCorrect: checkAnswer});
 
   if (!checkAnswer) {
     state.mistakes++;

@@ -21,6 +21,10 @@ const template = `<section class="main main--welcome">
 
 
 export default class WelcomeView extends AbstractView {
+  constructor(state) {
+    super();
+    this.state = state;
+  }
   get template() {
     return template;
   }

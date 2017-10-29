@@ -1,13 +1,19 @@
 import ResultWinView from "./result-win-view";
 import switchScreen from "../../../utils/switch-screen";
+import renderScreen from "../../../utils/render-screen";
 
-export default (state, statistics) => {
-  const screen = new ResultWinView(state, statistics);
+export default class ResultWin {
+  constructor(state, statistics) {
+    this.state = state;
+    this.statistics = statistics;
+    this.view = new ResultWinView(this.state, this.statistics);
 
-  screen.replayButtonClickHandler = () => {
-    switchScreen();
-  };
+    this.view.replayButtonClickHandler = () => {
+      switchScreen();
+    };
+  }
 
-  return screen.element;
-};
-
+  init() {
+    renderScreen(this.view.element);
+  }
+}

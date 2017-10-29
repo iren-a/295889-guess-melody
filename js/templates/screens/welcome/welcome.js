@@ -1,13 +1,25 @@
 import WelcomeView from "./welcome-view";
+import GameTimer from '../../../data/game-timer';
 import switchScreen from "../../../utils/switch-screen";
+import renderScreen from "../../../utils/render-screen";
 
-export default () => {
-  const screen = new WelcomeView();
+export default class Welcome {
+  constructor(state) {
+    this.state = state;
+    this.view = new WelcomeView();
 
-  screen.playButtonClickHandler = () => {
-    switchScreen();
-  };
+    this.view.playButtonClickHandler = () => {
+      this.onStartGame();
+    };
+  }
 
-  return screen.element;
-};
+  init() {
+    renderScreen(this.view.element);
+  }
 
+  onStartGame() {
+    this.state.timer = new GameTimer(this.state.time);
+    this.state.timer.start();
+    switchScreen(this.state);
+  }
+}

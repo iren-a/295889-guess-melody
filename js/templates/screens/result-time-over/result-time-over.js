@@ -1,12 +1,17 @@
 import ResultTimeOverView from "./result-time-over-view";
 import switchScreen from "../../../utils/switch-screen";
+import renderScreen from "../../../utils/render-screen";
 
-export default () => {
-  const screen = new ResultTimeOverView();
+export default class ResultTimeOver {
+  constructor() {
+    this.view = new ResultTimeOverView();
 
-  screen.replayButtonClickHandler = () => {
-    switchScreen();
-  };
+    this.view.replayButtonClickHandler = () => {
+      switchScreen();
+    };
+  }
 
-  return screen.element;
-};
+  init() {
+    renderScreen(this.view.element);
+  }
+}
