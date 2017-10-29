@@ -4,17 +4,25 @@ const settings = {
   maxGametime: 300000,
   maxCountMistakes: 3,
   maxQuickAnswerTime: 30000,
+  minTimeDanger: 30000,
   countLevels: 10
 };
 
 const state = {
+  timer: null,
   timeLeft: settings.maxGametime,
   mistakes: 0,
   level: 0,
   results: [],
   isReset: false,
+  get time() {
+    if (this.timer === null) {
+      return settings.maxGametime;
+    }
+    return this.timer.value;
+  },
   reset() {
-    this.time = settings.maxGametime;
+    this.timer = null;
     this.mistakes = 0;
     this.level = 0;
     this.results = [];

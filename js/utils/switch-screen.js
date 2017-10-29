@@ -1,35 +1,32 @@
-import renderScreen from "./render-screen";
+import Application from "../application";
 import {settings, state, questions, statistics} from "../data/game-options";
-import getScreenWelcome from "../templates/screens/welcome/welcome";
-import getScreenLevelArtist from "../templates/screens/level-artist/level-artist";
-import getScreenLevelGenre from "../templates/screens/level-genre/level-genre";
-import getScreenResultAttemptsOver from "../templates/screens/result-attempts-over/result-attempts-over";
-import getScreenResultTimeOver from "../templates/screens/result-time-over/result-time-over";
-import getScreenResultWin from "../templates/screens/result-win/result-win";
 
 export default () => {
 
   if (state.isReset) {
     state.reset();
-    renderScreen(getScreenWelcome());
+    Application.showWelcome(state);
 
-  } else if (state.timeLeft === 0) {
-    renderScreen(getScreenResultTimeOver());
+  } else if (state.time === 0) {
+    state.timer.stop();
+    Application.showResultTimeOver();
     state.isReset = true;
 
   } else if (state.mistakes > settings.maxCountMistakes) {
-    renderScreen(getScreenResultAttemptsOver());
+    state.timer.stop();
+    Application.showResultAttemptsOver();
     state.isReset = true;
 
   } else if (state.level === settings.countLevels) {
-    renderScreen(getScreenResultWin(state, statistics));
+    state.timer.stop();
+    Application.showResultWin(state, statistics);
     state.isReset = true;
 
   } else {
     if (questions[state.level].type === `artist`) {
-      renderScreen(getScreenLevelArtist(state, questions[state.level]));
+      Application.showLevelArtist(state, questions[state.level]);
     } else if (questions[state.level].type === `genre`) {
-      renderScreen(getScreenLevelGenre(state, questions[state.level]));
+      Application.showLevelGenre(state, questions[state.level]);
     }
     state.level++;
 

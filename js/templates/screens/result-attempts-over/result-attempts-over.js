@@ -1,14 +1,17 @@
 import ResultAttemptsOverView from "./result-attempts-over-view";
 import switchScreen from "../../../utils/switch-screen";
+import renderScreen from "../../../utils/render-screen";
 
-export default () => {
-  const screen = new ResultAttemptsOverView();
+export default class ResultAttemptsOver {
+  constructor() {
+    this.view = new ResultAttemptsOverView();
 
-  screen.replayButtonClickHandler = () => {
-    switchScreen();
-  };
+    this.view.replayButtonClickHandler = () => {
+      switchScreen();
+    };
+  }
 
-  return screen.element;
-};
-
-
+  init() {
+    renderScreen(this.view.element);
+  }
+}

@@ -1,5 +1,6 @@
 import AbstractView from "../../../abstract-view";
-import getStateTemplate from "../../get-state-template";
+import TimerView from '../../timer-view';
+import getMistakesTemplate from "../../get-mistakes-template";
 import getPlayerTemplate from "../../get-player-template";
 
 const getTitle = (title) => {
@@ -16,9 +17,10 @@ const getAnswersList = (question) => {
   }).join(``);
 };
 
-const getTemplate = (state, question) => {
+const getTemplate = (question, timerTemplate, mistakesCount) => {
   return `<section class="main main--level main--level-genre">
-   ${getStateTemplate(state)}
+    ${timerTemplate}
+    ${getMistakesTemplate(mistakesCount)}
     <div class="main-wrap">
       ${getTitle(question.title)}
       <form class="genre">
@@ -35,9 +37,10 @@ export default class LevelGenreView extends AbstractView {
     super();
     this.state = state;
     this.question = question;
+    this.timerView = new TimerView();
   }
   get template() {
-    return getTemplate(this.state, this.question);
+    return getTemplate(this.question, this.timerView.template, this.state.mistakes);
   }
   bind() {
     const button = this.element.querySelector(`.genre-answer-send`);
@@ -49,6 +52,9 @@ export default class LevelGenreView extends AbstractView {
       item.addEventListener(`click`, (evt) => this.answerClickHandler(evt, answers, button));
     });
     button.addEventListener(`click`, (evt) => this.buttonClickHandler(evt, answers));
+  }
+  updateTime(time) {
+    this.timerView.updateTime(time);
   }
   answerClickHandler() {}
   buttonClickHandler() {}
