@@ -1,25 +1,25 @@
-import Timer from '../utils/timer';
+import Timer from './timer';
 
 export default class GameTimer {
-  constructor(seconds) {
-    this.timer = new Timer(seconds);
+  constructor(time) {
+    this.timer = new Timer(time);
     this.timerInterval = null;
-    this.seconds = seconds;
+    this.time = time;
   }
 
   get value() {
-    return this.seconds;
+    return this.time;
   }
 
   start() {
     this.timerInterval = setInterval(() => {
-      this.seconds = this.timer.tick();
+      this.time = this.timer.tick();
 
-      if (this.seconds === 0) {
+      if (this.time === 0) {
         this.stop();
       }
 
-      this.onTick(this.seconds);
+      this.onTick(this.time);
     }, 1000);
   }
 

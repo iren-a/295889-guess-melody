@@ -1,10 +1,9 @@
-import Welcome from './templates/screens/welcome/welcome';
-import LevelArtist from './templates/screens/level-artist/level-artist';
-import LevelGenre from './templates/screens/level-genre/level-genre';
-import ResultWin from './templates/screens/result-win/result-win';
-import ResultAttemptsOver from './templates/screens/result-attempts-over/result-attempts-over';
-import ResultTimeOver from './templates/screens/result-time-over/result-time-over';
-import GameTimer from './data/game-timer';
+import WelcomeScreen from './templates/screens/welcome/welcome';
+import LevelArtistScreen from './templates/screens/level-artist/level-artist';
+import LevelGenreScreen from './templates/screens/level-genre/level-genre';
+import ResultWinScreen from './templates/screens/result-win/result-win';
+import ResultAttemptsOverScreen from './templates/screens/result-attempts-over/result-attempts-over';
+import ResultTimeOverScreen from './templates/screens/result-time-over/result-time-over';
 
 const ControllerId = {
   WELCOME: `welcome`,
@@ -16,20 +15,25 @@ const ControllerId = {
 };
 
 const routes = {
-  [ControllerId.WELCOME]: Welcome,
-  [ControllerId.LEVEL_ARTIST]: LevelArtist,
-  [ControllerId.LEVEL_GENRE]: LevelGenre,
-  [ControllerId.RESULT_WIN]: ResultWin,
-  [ControllerId.RESULT_ATTEMPTS_OVER]: ResultAttemptsOver,
-  [ControllerId.RESULT_TIME_OVER]: ResultTimeOver,
+  [ControllerId.WELCOME]: WelcomeScreen,
+  [ControllerId.LEVEL_ARTIST]: LevelArtistScreen,
+  [ControllerId.LEVEL_GENRE]: LevelGenreScreen,
+  [ControllerId.RESULT_WIN]: ResultWinScreen,
+  [ControllerId.RESULT_ATTEMPTS_OVER]: ResultAttemptsOverScreen,
+  [ControllerId.RESULT_TIME_OVER]: ResultTimeOverScreen,
 };
 
+
 const saveState = (state) => {
-  return window.btoa(encodeURIComponent(JSON.stringify(state)));
+  return btoa(encodeURIComponent(JSON.stringify(state)));
 };
 
 const loadState = (dataString) => {
-  return JSON.parse(decodeURIComponent(window.atob(dataString)));
+  try {
+    return JSON.parse(decodeURIComponent(atob(dataString)));
+  } catch (err) {
+    return null;
+  }
 };
 
 
@@ -56,30 +60,23 @@ export default class Application {
     location.hash = `${ControllerId.WELCOME}?${saveState(state)}`;
   }
 
-  static showLevelArtist(state, question) {
-    if (state.level === 0) {
-      state.timer = new GameTimer(state.time);
-      state.timer.start();
-    }
-    new LevelArtist(state, question).init();
+  static showLevelArtist(state) {
+    location.hash = `${ControllerId.LEVEL_ARTIST}?${saveState(state)}`;
   }
 
-  static showLevelGenre(state, question) {
-    new LevelGenre(state, question).init();
+  static showLevelGenre(state) {
+    location.hash = `${ControllerId.LEVEL_GENRE}?${saveState(state)}`;
   }
 
   static showResultWin(state) {
-    state.timer.stop();
     location.hash = `${ControllerId.RESULT_WIN}?${saveState(state)}`;
   }
 
   static showResultAttemptsOver(state) {
-    state.timer.stop();
     location.hash = `${ControllerId.RESULT_ATTEMPTS_OVER}?${saveState(state)}`;
   }
 
   static showResultTimeOver(state) {
-    state.timer.stop();
     location.hash = `${ControllerId.RESULT_TIME_OVER}?${saveState(state)}`;
   }
 }
