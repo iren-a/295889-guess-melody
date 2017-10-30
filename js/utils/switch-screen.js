@@ -2,7 +2,6 @@ import Application from "../application";
 import {settings, state, questions} from "../data/game-options";
 import GameTimer from './game-timer';
 import updateTime from './updateTime';
-import convertTime from '../utils/convert-time';
 
 export default () => {
 
@@ -43,4 +42,3 @@ export default () => {
   }
 
 };
-
