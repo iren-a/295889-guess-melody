@@ -1,5 +1,4 @@
 import WelcomeView from "./welcome-view";
-import GameTimer from '../../../data/game-timer';
 import switchScreen from "../../../utils/switch-screen";
 import renderScreen from "../../../utils/render-screen";
 
@@ -18,8 +17,6 @@ export default class Welcome {
   }
 
   onStartGame() {
-    this.state.timer = new GameTimer(this.state.time);
-    this.state.timer.start();
     switchScreen(this.state);
   }
 }

@@ -2,11 +2,13 @@ import LevelGenreView from "./level-genre-view";
 import switchScreen from "../../../utils/switch-screen";
 import processingAnswer from "../../../utils/processing-answer";
 import renderScreen from "../../../utils/render-screen";
+import {questions} from "../../../data/game-options";
+
 
 export default class LevelArtist {
-  constructor(state, question) {
+  constructor(state) {
     this.state = state;
-    this.question = question;
+    this.question = questions[state.level];
     this.view = new LevelGenreView(this.state, this.question);
     this.answerTimerValue = 0;
     this.answerTimer = null;
@@ -25,15 +27,12 @@ export default class LevelArtist {
         return item.checked;
       }).map((item) => {
         return item.value;
-      }), question, this.answerTimerValue * 1000);
+      }), this.question, this.answerTimerValue * 1000);
       switchScreen();
     };
   }
   init() {
     this.answerTimer = setInterval(() => this.answerTimerValue++, 1000);
-    this.state.timer.onTick = (time) => {
-      this.view.updateTime(time);
-    };
     renderScreen(this.view.element);
   }
 }

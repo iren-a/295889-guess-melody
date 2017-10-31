@@ -1,5 +1,7 @@
 import Application from "../application";
-import {settings, state, questions, statistics} from "../data/game-options";
+import {settings, state, questions} from "../data/game-options";
+import GameTimer from './game-timer';
+import updateTime from './updateTime';
 
 export default () => {
 
@@ -9,28 +11,34 @@ export default () => {
 
   } else if (state.time === 0) {
     state.timer.stop();
-    Application.showResultTimeOver();
+    Application.showResultTimeOver(state);
     state.isReset = true;
 
   } else if (state.mistakes > settings.maxCountMistakes) {
     state.timer.stop();
-    Application.showResultAttemptsOver();
+    Application.showResultAttemptsOver(state);
     state.isReset = true;
 
   } else if (state.level === settings.countLevels) {
     state.timer.stop();
-    Application.showResultWin(state, statistics);
+    Application.showResultWin(state);
     state.isReset = true;
 
   } else {
+    if (state.level === 0) {
+      state.timer = new GameTimer(state.time);
+      state.timer.onTick = (time) => {
+        updateTime(time);
+      };
+      state.timer.start();
+    }
     if (questions[state.level].type === `artist`) {
-      Application.showLevelArtist(state, questions[state.level]);
+      Application.showLevelArtist(state);
     } else if (questions[state.level].type === `genre`) {
-      Application.showLevelGenre(state, questions[state.level]);
+      Application.showLevelGenre(state);
     }
     state.level++;
 
   }
 
 };
-
