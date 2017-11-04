@@ -43,6 +43,12 @@ export default class LevelGenreView extends AbstractView {
     return getTemplate(this.question, this.state.mistakes);
   }
   bind() {
+    const playButtons = this.element.querySelectorAll(`.player-control`);
+    Array.from(playButtons).forEach((item) => {
+      item.classList.remove(`player-control--pause`);
+      item.addEventListener(`click`, (evt) => this.playButtonClickHandler(evt, playButtons));
+    });
+
     const button = this.element.querySelector(`.genre-answer-send`);
     button.disabled = true;
 
@@ -55,4 +61,5 @@ export default class LevelGenreView extends AbstractView {
   }
   answerClickHandler() {}
   buttonClickHandler() {}
+  playButtonClickHandler() {}
 }

@@ -14,12 +14,12 @@ export default () => {
     Application.showResultTimeOver(state);
     state.isReset = true;
 
-  } else if (state.mistakes > settings.maxCountMistakes) {
+  } else if (state.mistakes > settings.MAX_COUNT_MISTAKES) {
     state.timer.stop();
     Application.showResultAttemptsOver(state);
     state.isReset = true;
 
-  } else if (state.level === settings.countLevels) {
+  } else if (state.level === settings.COUNT_LEVELS) {
     state.timer.stop();
     Application.showResultWin(state);
     state.isReset = true;

@@ -46,10 +46,14 @@ export default class LevelArtistView extends AbstractView {
     return getTemplate(this.question, this.state.mistakes);
   }
   bind() {
+    const playButton = this.element.querySelector(`.player-control`);
+    playButton.addEventListener(`click`, () => this.playButtonClickHandler(playButton));
+
     const answers = this.element.querySelectorAll(`.main-answer-r`);
     answers.forEach((item) => {
       item.addEventListener(`click`, this.answerClickHandler);
     });
   }
   answerClickHandler() {}
+  playButtonClickHandler() {}
 }

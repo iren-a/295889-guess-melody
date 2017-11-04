@@ -7,8 +7,8 @@ const title = `<h2 class="title main-title">Правила игры</h2>`;
 const buttonPlay = `<button class="main-play">Начать игру</button>`;
 
 const description = `<p class="text main-text">
-    Правила просты&nbsp;— за&nbsp;${settings.maxGametime / 1000 / 60} минут ответить на все вопросы.<br>
-    Ошибиться можно ${settings.maxCountMistakes} раза.<br>
+    Правила просты&nbsp;— за&nbsp;${settings.MAX_GAME_TIME / 1000 / 60} минут ответить на все вопросы.<br>
+    Ошибиться можно ${settings.MAX_COUNT_MISTAKES} раза.<br>
     Удачи!
   </p>`;
 

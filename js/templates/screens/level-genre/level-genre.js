@@ -30,6 +30,26 @@ export default class LevelArtist {
       }), this.question, this.answerTimerValue * 1000);
       switchScreen();
     };
+
+    this.view.playButtonClickHandler = (evt, playButtons) => {
+      const currentPlayButton = evt.target;
+      const otherPlayButtons = Array.from(playButtons).filter((playButton) => playButton !== currentPlayButton);
+
+      evt.preventDefault();
+
+      otherPlayButtons.forEach((playButton) => {
+        playButton.classList.remove(`player-control--pause`);
+        playButton.previousElementSibling.pause();
+      });
+
+      currentPlayButton.classList.toggle(`player-control--pause`);
+
+      if (currentPlayButton.classList.contains(`player-control--pause`)) {
+        currentPlayButton.previousElementSibling.play();
+      } else {
+        currentPlayButton.previousElementSibling.pause();
+      }
+    };
   }
   init() {
     this.answerTimer = setInterval(() => this.answerTimerValue++, 1000);
