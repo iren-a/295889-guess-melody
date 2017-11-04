@@ -1,3 +1,6 @@
+import Loader from './loader';
+import adaptQuestions from './data/adapt-questions';
+import {fillQuestions} from './data/game-options';
 import WelcomeScreen from './templates/screens/welcome/welcome';
 import LevelArtistScreen from './templates/screens/level-artist/level-artist';
 import LevelGenreScreen from './templates/screens/level-genre/level-genre';
@@ -38,7 +41,9 @@ const loadState = (dataString) => {
 
 
 export default class Application {
-  static init() {
+  static init(loadedData) {
+    fillQuestions(loadedData);
+
     const hashChangeHandler = () => {
       const hashValue = location.hash.replace(`#`, ``);
       const [id, data] = hashValue.split(`?`);
@@ -81,5 +86,8 @@ export default class Application {
   }
 }
 
-Application.init();
+Loader.loadData().
+    then((loadedData) => adaptQuestions(loadedData)).
+    then((adaptedLoadedData) => Application.init(adaptedLoadedData)).
+    catch(Loader.onError);
 

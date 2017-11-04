@@ -9,7 +9,7 @@ const title = `<h2 class="title">Вы настоящий меломан!</h2>`;
 
 const getStatTemplate = (state) => {
   const countQuickAnswers = state.results.filter((item) => {
-    return (item.isCorrect && item.time < settings.maxQuickAnswerTime);
+    return (item.isCorrect && item.time < settings.MAX_QUICK_ANSWER_TIME);
   }).length;
 
   const score = getScore(state.results);

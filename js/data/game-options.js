@@ -1,23 +1,21 @@
-import audio from "./audio";
-
 const settings = {
-  maxGametime: 300000,
-  maxCountMistakes: 3,
-  maxQuickAnswerTime: 30000,
-  minTimeDanger: 30000,
-  countLevels: 10
+  MAX_GAME_TIME: 300000,
+  MAX_COUNT_MISTAKES: 3,
+  MAX_QUICK_ANSWER_TIME: 30000,
+  MIN_TIME_DANGER: 30000,
+  COUNT_LEVELS: 10
 };
 
 const state = {
   timer: null,
-  timeLeft: settings.maxGametime,
+  timeLeft: settings.MAX_GAME_TIME,
   mistakes: 0,
   level: 0,
   results: [],
   isReset: false,
   get time() {
     if (this.timer === null) {
-      return settings.maxGametime;
+      return settings.MAX_GAME_TIME;
     }
     return this.timer.value;
   },
@@ -30,229 +28,12 @@ const state = {
   }
 };
 
-const questions = [
-  {
-    type: `artist`,
-    title: `Кто исполняет эту песню?`,
-    audioSrc: audio[1].src,
-    answerList: [
-      {
-        answer: audio[0].artist,
-        image: audio[0].image,
-        isCorrect: false
-      },
-      {
-        answer: audio[1].artist,
-        image: audio[1].image,
-        isCorrect: true
-      },
-      {
-        answer: audio[2].artist,
-        image: audio[2].image,
-        isCorrect: false
-      }
-    ]
-  },
-  {
-    type: `genre`,
-    title: `Выберите кантри треки`,
-    answerList: [
-      {
-        answer: audio[2].src,
-        isCorrect: true
-      },
-      {
-        answer: audio[3].src,
-        isCorrect: true
-      },
-      {
-        answer: audio[4].src,
-        isCorrect: false
-      },
-      {
-        answer: audio[5].src,
-        isCorrect: false
-      }
-    ]
-  },
-  {
-    type: `artist`,
-    title: `Кто исполняет эту песню?`,
-    audioSrc: audio[1].src,
-    answerList: [
-      {
-        answer: audio[0].artist,
-        image: audio[0].image,
-        isCorrect: false
-      },
-      {
-        answer: audio[1].artist,
-        image: audio[1].image,
-        isCorrect: true
-      },
-      {
-        answer: audio[2].artist,
-        image: audio[2].image,
-        isCorrect: false
-      }
-    ]
-  },
-  {
-    type: `genre`,
-    title: `Выберите кантри треки`,
-    answerList: [
-      {
-        answer: audio[2].src,
-        isCorrect: true
-      },
-      {
-        answer: audio[3].src,
-        isCorrect: true
-      },
-      {
-        answer: audio[4].src,
-        isCorrect: false
-      },
-      {
-        answer: audio[5].src,
-        isCorrect: false
-      }
-    ]
-  },
-  {
-    type: `artist`,
-    title: `Кто исполняет эту песню?`,
-    audioSrc: audio[1].src,
-    answerList: [
-      {
-        answer: audio[0].artist,
-        image: audio[0].image,
-        isCorrect: false
-      },
-      {
-        answer: audio[1].artist,
-        image: audio[1].image,
-        isCorrect: true
-      },
-      {
-        answer: audio[2].artist,
-        image: audio[2].image,
-        isCorrect: false
-      }
-    ]
-  },
-  {
-    type: `genre`,
-    title: `Выберите кантри треки`,
-    answerList: [
-      {
-        answer: audio[2].src,
-        isCorrect: true
-      },
-      {
-        answer: audio[3].src,
-        isCorrect: true
-      },
-      {
-        answer: audio[4].src,
-        isCorrect: false
-      },
-      {
-        answer: audio[5].src,
-        isCorrect: false
-      }
-    ]
-  },
-  {
-    type: `artist`,
-    title: `Кто исполняет эту песню?`,
-    audioSrc: audio[1].src,
-    answerList: [
-      {
-        answer: audio[0].artist,
-        image: audio[0].image,
-        isCorrect: false
-      },
-      {
-        answer: audio[1].artist,
-        image: audio[1].image,
-        isCorrect: true
-      },
-      {
-        answer: audio[2].artist,
-        image: audio[2].image,
-        isCorrect: false
-      }
-    ]
-  },
-  {
-    type: `genre`,
-    title: `Выберите кантри треки`,
-    answerList: [
-      {
-        answer: audio[2].src,
-        isCorrect: true
-      },
-      {
-        answer: audio[3].src,
-        isCorrect: true
-      },
-      {
-        answer: audio[4].src,
-        isCorrect: false
-      },
-      {
-        answer: audio[5].src,
-        isCorrect: false
-      }
-    ]
-  },
-  {
-    type: `artist`,
-    title: `Кто исполняет эту песню?`,
-    audioSrc: audio[1].src,
-    answerList: [
-      {
-        answer: audio[0].artist,
-        image: audio[0].image,
-        isCorrect: false
-      },
-      {
-        answer: audio[1].artist,
-        image: audio[1].image,
-        isCorrect: true
-      },
-      {
-        answer: audio[2].artist,
-        image: audio[2].image,
-        isCorrect: false
-      }
-    ]
-  },
-  {
-    type: `genre`,
-    title: `Выберите кантри треки`,
-    answerList: [
-      {
-        answer: audio[2].src,
-        isCorrect: true
-      },
-      {
-        answer: audio[3].src,
-        isCorrect: true
-      },
-      {
-        answer: audio[4].src,
-        isCorrect: false
-      },
-      {
-        answer: audio[5].src,
-        isCorrect: false
-      }
-    ]
-  }
-];
+let questions = [];
+
+const fillQuestions = (loadedData) => {
+  questions = loadedData;
+};
 
 const statistics = [1, 2, 3, 4, 5];
 
-export {settings, state, questions, statistics};
+export {settings, state, questions, fillQuestions, statistics};

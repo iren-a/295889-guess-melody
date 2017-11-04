@@ -17,9 +17,19 @@ export default class LevelArtist {
       processingAnswer([evt.target.value], this.question, this.answerTimerValue * 1000);
       switchScreen();
     };
+    this.view.playButtonClickHandler = (playButton) => {
+      playButton.classList.toggle(`player-control--pause`);
+
+      if (playButton.classList.contains(`player-control--pause`)) {
+        playButton.previousElementSibling.play();
+      } else {
+        playButton.previousElementSibling.pause();
+      }
+    };
   }
   init() {
     this.answerTimer = setInterval(() => this.answerTimerValue++, 1000);
+    this.view.element.querySelector(`audio`).play();
     renderScreen(this.view.element);
   }
 }
