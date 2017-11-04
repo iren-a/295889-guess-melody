@@ -27,7 +27,6 @@ const getArtistQuestion = (loadedQuestion) => {
 };
 
 export default (loadedData) => {
-  console.log(loadedData);
   const adaptedData = loadedData.map((loadedQuestion) => {
     let adaptedQuestion;
     if (loadedQuestion.type === `artist`) {
@@ -38,7 +37,7 @@ export default (loadedData) => {
     }
     return adaptedQuestion;
   });
-  console.log(adaptedData);
+
   return adaptedData;
 };
 
