@@ -1,6 +1,7 @@
 import Loader from './loader';
 import adaptQuestions from './data/adapt-questions';
 import {fillQuestions} from './data/game-options';
+import getScore from "./utils/get-score";
 import WelcomeScreen from './templates/screens/welcome/welcome';
 import LevelArtistScreen from './templates/screens/level-artist/level-artist';
 import LevelGenreScreen from './templates/screens/level-genre/level-genre';
@@ -74,7 +75,12 @@ export default class Application {
   }
 
   static showResultWin(state) {
-    location.hash = `${ControllerId.RESULT_WIN}?${saveState(state)}`;
+    state.score = getScore(state.results);
+    Loader.saveResults(state).then(() => {
+      location.hash = `${ControllerId.RESULT_WIN}?${saveState(state)}`;
+    });
+
+    // location.hash = `${ControllerId.RESULT_WIN}?${saveState(state)}`;
   }
 
   static showResultAttemptsOver(state) {

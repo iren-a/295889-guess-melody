@@ -1,4 +1,5 @@
 const SERVER_URL = `https://es.dump.academy/guess-melody`;
+const DEFAULT_USERNAME = `iarinushkina-295889`;
 
 class Loader {
   static loadData() {
@@ -9,6 +10,32 @@ class Loader {
         throw new Error(`Ошибка при загрузке данных с сервера (${response.status}) ${response.statusText}`);
       }
     });
+  }
+
+  static loadResults(username = DEFAULT_USERNAME) {
+    return fetch(`${SERVER_URL}/stats/${username}`).then((response) => {
+      if (response.ok) {
+        try {
+          return response.json();
+        } catch (err) {
+          return [];
+        }
+      } else {
+        throw new Error(`Ошибка при загрузке данных с сервера (${response.status}) ${response.statusText}`);
+      }
+    });
+  }
+
+  static saveResults(data, username = DEFAULT_USERNAME) {
+    const requestSettings = {
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': `application/json`
+      },
+      method: `POST`
+    };
+
+    return fetch(`${SERVER_URL}/stats/${username}`, requestSettings);
   }
 
   static onError(message) {

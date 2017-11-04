@@ -1,6 +1,5 @@
 export default (statistics, score) => {
 
-  statistics.push(score);
   statistics.sort((left, right) => right - left);
   const countOfPlayers = statistics.length;
   const position = statistics.lastIndexOf(score) + 1;
