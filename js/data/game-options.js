@@ -8,9 +8,9 @@ const settings = {
 
 const state = {
   timer: null,
-  timeLeft: settings.MAX_GAME_TIME,
   mistakes: 0,
   level: 0,
+  score: null,
   results: [],
   isReset: false,
   get time() {
@@ -23,6 +23,7 @@ const state = {
     this.timer = null;
     this.mistakes = 0;
     this.level = 0;
+    this.score = null;
     this.results = [];
     this.isReset = false;
   }
@@ -34,6 +35,5 @@ const fillQuestions = (loadedData) => {
   questions = loadedData;
 };
 
-const statistics = [1, 2, 3, 4, 5];
 
-export {settings, state, questions, fillQuestions, statistics};
+export {settings, state, questions, fillQuestions};
